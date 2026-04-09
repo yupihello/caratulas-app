@@ -12,7 +12,7 @@ const http = require('http');
 
 const { readCaratulaOds, readBrendaOds } = require('./lib/ods-reader');
 const { generateCaratulaPdf } = require('./lib/caratula-pdf');
-const { checkForUpdate, downloadAndApplyUpdate, checkAndPromptUpdate, CURRENT_VERSION } = require('./lib/updater');
+const { checkForUpdate, downloadAndApplyUpdate, checkAndPromptUpdate, applyPendingUpdate, CURRENT_VERSION } = require('./lib/updater');
 
 const PORT = 4000;
 let mainWindow;
@@ -134,7 +134,13 @@ function startServer() {
     });
 
     // API: Check for updates
-    server.get('/api/version', (_req, res) => res.json({ version: CURRENT_VERSION }));
+    server.get('/api/version', (_req, res) => res.json({
+      version: CURRENT_VERSION,
+      portableExe: process.env.PORTABLE_EXECUTABLE_FILE || null,
+      portableDir: process.env.PORTABLE_EXECUTABLE_DIR || null,
+      execPath: process.execPath,
+      isPackaged: app.isPackaged,
+    }));
 
     server.post('/api/check-update', async (_req, res) => {
       const info = await checkForUpdate();
@@ -156,7 +162,7 @@ function startServer() {
     // Next.js pages
     server.all('*', (req, res) => handle(req, res));
 
-    http.createServer(server).listen(PORT, () => {
+    http.createServer(server).listen(PORT, '127.0.0.1', () => {
       console.log(`Server ready on http://localhost:${PORT}`);
       createWindow();
     });
@@ -255,6 +261,10 @@ function createWindow() {
     }, 3000);
   });
 }
+
+// Apply pending update FIRST — before Electron locks the exe via NSIS extraction.
+// This runs synchronously at module load time, before app.whenReady().
+applyPendingUpdate();
 
 app.whenReady().then(startServer);
 
