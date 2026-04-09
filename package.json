@@ -1,6 +1,6 @@
 {
   "name": "caratulas-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generador de Caratulas de Expedientes SEMARNAT",
   "main": "main.js",
   "scripts": {
