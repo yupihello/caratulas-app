@@ -1,0 +1,132 @@
+/* ============================================
+   UI Components – Catppuccin Dark Theme
+   ============================================ */
+
+/* ---------- Button ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, opacity 0.12s;
+  line-height: 1.4;
+}
+.btn:hover { background: var(--bg-hover); border-color: var(--text-muted); }
+.btn:disabled { opacity: 0.5; cursor: default; pointer-events: none; }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.btn_primary {
+  background: var(--accent);
+  color: var(--bg-primary);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.btn_primary:hover { opacity: 0.9; background: var(--accent); }
+
+.btn_secondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.btn_danger {
+  background: var(--accent-red);
+  color: var(--bg-primary);
+  border-color: var(--accent-red);
+  font-weight: 600;
+}
+.btn_danger:hover { opacity: 0.9; background: var(--accent-red); }
+
+.btn_ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+.btn_ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.btn_sm { padding: 4px 10px; font-size: 11px; }
+.btn_md { padding: 6px 14px; font-size: 12px; }
+
+.btn_loading { opacity: 0.7; cursor: wait; }
+
+.btnSpinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* ---------- Input ---------- */
+.inputWrap { display: flex; flex-direction: column; gap: 4px; }
+
+.input {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+  outline: none;
+  transition: border-color 0.12s, box-shadow 0.12s;
+  width: 100%;
+}
+.input::placeholder { color: var(--text-muted); }
+.input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(137, 180, 250, 0.15); }
+.input:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- FieldLabel ---------- */
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  font-family: var(--font-ui);
+  line-height: 1.4;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.card_form   { border-left: 3px solid var(--accent); }
+
+.cardTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+/* ---------- FormGroup ---------- */
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ---------- FieldGrid ---------- */
+.fieldGrid {
+  display: grid;
+  gap: 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

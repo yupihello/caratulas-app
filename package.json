@@ -1,0 +1,48 @@
+{
+  "name": "caratulas-app",
+  "version": "1.0.0",
+  "description": "Generador de Caratulas de Expedientes SEMARNAT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "next build && electron-builder --win portable",
+    "build:next": "next build",
+    "build:exe": "electron-builder --win portable"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "next": "^15.3.3",
+    "pdfkit": "^0.16.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.semarnat.caratulas",
+    "productName": "Generador de Caratulas",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "next.config.js",
+      "lib/**/*",
+      "components/**/*",
+      "pages/**/*",
+      "styles/**/*",
+      "public/**/*",
+      ".next/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "portable": {
+      "artifactName": "CaratulasApp.exe"
+    }
+  }
+}
