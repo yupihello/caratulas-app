@@ -262,11 +262,12 @@ function createWindow() {
   });
 }
 
-// Apply pending update FIRST — before Electron locks the exe via NSIS extraction.
-// This runs synchronously at module load time, before app.whenReady().
-applyPendingUpdate();
-
-app.whenReady().then(startServer);
+// Apply pending update on startup, then start the server.
+// applyPendingUpdate retries for up to 15s if the exe is still locked by the old instance.
+app.whenReady().then(async () => {
+  await applyPendingUpdate();
+  startServer();
+});
 
 app.on('window-all-closed', () => {
   app.quit();
