@@ -264,8 +264,8 @@ function createWindow() {
 
 // Apply pending update on startup, then start the server.
 // applyPendingUpdate retries for up to 15s if the exe is still locked by the old instance.
-app.whenReady().then(async () => {
-  await applyPendingUpdate();
+app.whenReady().then(() => {
+  applyPendingUpdate();
   startServer();
 });
 
